@@ -48,7 +48,6 @@ public class ItemDetailsControllerTest {
         String expectedJson = "{'id': 1,'name': 'OnePlus6T';'description': 'One plus 6T mobile'}";
         Mockito.when(itemDetailsService.getItemDetails(Mockito.anyInt())).thenReturn(optional);
 
-        given(itemDetailsService.getItemDetails(1)).willReturn(optional);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/cosomos/items/1").contentType(MediaType.APPLICATION_JSON);
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
                 .andExpect(content().json(expectedJson))
@@ -62,7 +61,6 @@ public class ItemDetailsControllerTest {
         String expectedJson = "{'id': 1,'name': 'OnePlus6T';'description': 'One plus 6T mobile'}";
         Mockito.when(itemDetailsService.saveItemDetails(Mockito.any(Item.class))).thenReturn(item);
 
-        given(itemDetailsService.saveItemDetails(item)).willReturn(item);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/cosomos/items/").content(expectedJson).contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.TEXT_PLAIN);
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
@@ -78,7 +76,6 @@ public class ItemDetailsControllerTest {
         String inputItemDetails = "{'id': 1,'name': 'OnePlus6T';'description': 'One plus 6T mobile updated'}";
         Mockito.when(itemDetailsService.saveItemDetails(Mockito.any(Item.class))).thenReturn(item);
 
-        given(itemDetailsService.saveItemDetails(item)).willReturn(item);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/cosomos/items/").content(inputItemDetails).contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.TEXT_PLAIN_VALUE);
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
@@ -91,7 +88,6 @@ public class ItemDetailsControllerTest {
     public void deleteItemDetailsTest() throws Exception {
         Mockito.doNothing().when(itemDetailsService).deleteItemDetails(Mockito.anyInt());
 
-        given(itemDetailsService.getItemDetails(1)).willReturn(null);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/cosomos/items/1");
         MvcResult mvcResult = mockMvc.perform(requestBuilder)
                 .andReturn();
